@@ -20,12 +20,15 @@ Before running the script, ensure you have the following:
 ## Setup
 
 ### Configure the .env File
-Create a .env file in the root of the project directory and configure it with the required environment variables. Example file is in project directory with name env_example .
+Create a .env file in the root of the project directory and configure it with the required environment variables. 
+Example file is in project directory with name env_example .
 
-Channels and their friendly names you can find in chat logs MatrixServerTool\chat_logs, gid":"f5161ce4932000
+Channels and their friendly names you can find in chat logs directory MatrixServerTool\chat_logs, and find example gid":"f5161ce4932000
 
 ### Install the external dependencies
-To install the external dependencies, run the following command in cmd: pip install python-dotenv requests mysql-connector-python
+To install the external dependencies, run the following command in cmd: 
+
+pip install python-dotenv requests mysql-connector-python
 
 ### Running the Script
 Once everything is configured, you can run the script by executing command in cmd: python reward.py
