@@ -1,41 +1,185 @@
-# Myth of Empires Reward Bot
+# Myth of Empires Python Reward Bot
 
-This Python script allows you to execute RCON commands on a Myth of Empires server based on chat log file data. It is designed to process user commands, check for rewards, and execute specific commands in the game when a certain condition is met. It uses environment variables for configuration, integrates with Discord to send notifications, and can process account data stored in CSV format.
+This wiki provides documentation for setting up and running the Python-based reward bot for **Myth of Empires**. The bot monitors chat logs for reward commands and executes RCON commands to reward players.
 
-## Features
+---
 
-- **Reward System**: Allows users to claim daily rewards by typing a specific command.
-- **CSV Logging**: Tracks user interactions and actions in a CSV file (`account_log.csv`).
-- **Discord Integration**: Sends notifications to Discord when a reward is claimed.
-- **Customizable Commands**: Commands are loaded from environment variables, with a chance factor.
+## Table of Contents
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+  - [Environment Variables (`.env`)](#environment-variables-env)
+  - [CSV File (`account_log.csv`)](#csv-file-account_logcsv)
+  - [Log Files Directory](#log-files-directory)
+- [Running the Bot](#running-the-bot)
+- [Code Explanation](#code-explanation)
+- [Troubleshooting](#troubleshooting)
+
+---
+
+## Overview
+
+The reward bot is designed to:
+1. Monitor **chat logs** from Myth of Empires servers.
+2. Detect when players type the `/reward` command.
+3. Execute RCON commands to grant rewards (e.g., items, resources).
+4. Log rewards in a CSV file to ensure daily limits are respected.
+
+The bot also supports custom configurations through a `.env` file for database connections, commands, and Discord webhooks.
+
+---
 
 ## Prerequisites
 
-Before running the script, ensure you have the following:
+1. Python 3.8 or higher installed on your machine.
+2. Required Python packages installed (use `pip install -r requirements.txt` if a `requirements.txt` file is created).
+3. `mcrcon.exe` placed in the bot directory (for RCON command execution).
+4. A `.env` file properly configured (see below).
 
-- **Python 3.x**: The script is written in Python and requires Python 3 to run.
-- **Myth of Empires with RCON and MySQL**: The script interacts with your MoE server using RCON. You need to enable RCON. To fetch account IDs from a MySQL database, ensure you have access to a MySQL server with the required database and tables.
-- **Discord Webhook**: The script sends notifications to a Discord channel. You will need a Discord webhook URL.
+---
 
 ## Setup
 
-### Configure the .env File
-Create a .env file in the root of the project directory and configure it with the required environment variables. 
-Example file is in project directory with name env_example .
+### Environment Variables (`.env`)
 
-Channels and their friendly names you can find in chat logs directory MatrixServerTool\chat_logs, and find example gid":"f5161ce4932000
+Create a `.env` file in the root directory of the bot. Here's an example configuration:
 
-### Install the external dependencies
-To install the external dependencies, run the following command in cmd: 
+```dotenv
+# Channels and their friendly names
+CHANNELS="f37d4ffd832000=101,f5161ce4932000=102"
 
-pip install python-dotenv requests mysql-connector-python
+# Mapping of channels to IP addresses and ports
+CHANNEL_101_IP="192.168.2.100"
+CHANNEL_101_PORT="5030"
+CHANNEL_101_RCON_PASSWORD="password"
 
-### Running the Script
-Once everything is configured, you can run the script by executing command in cmd: python reward.py
+CHANNEL_102_IP="192.168.2.100"
+CHANNEL_102_PORT="5032"
+CHANNEL_102_RCON_PASSWORD="password"
 
-The script will:
-- Monitor the chat log files in the directory specified by LOG_DIRECTORY.
-- Check each log line for a reward command (e.g., /reward).
-- If the user has not claimed their reward today, it will execute the corresponding RCON commands.
-- Send a notification to Discord about the user's reward claim.
-- Log the status to account_log.csv.
+# Discord webhook
+DISCORD_WEBHOOK="https://discord.com/api/webhooks/"
+
+# Path to the CSV file
+csv_file_path="account_log.csv"
+
+# Database parameters
+DB_HOST="127.0.0.1"
+DB_USER="moediscord"
+DB_PASSWORD="moediscord"
+DB_DATABASE="moe_role"
+DB_COLLATION="utf8mb4_general_ci"
+
+# Path to the log files
+LOG_DIRECTORY="C:/serverfiles/MatrixServerTool/chat_logs/"
+
+# Reward command for the bot
+REWARD_COMMAND="/reward"
+
+# RCON commands for the bot
+COMMAND_1="AddCopper {s_account_uid} 10000"
+COMMAND_1_CHANCE=100
+
+COMMAND_2="AddItemToPlayer {s_account_uid} 5412 1 1 1 -1 1.000000 false"
+COMMAND_2_CHANCE=100
+
+COMMAND_3="AddItemToPlayer {s_account_uid} 4905 1 1 1 -1 1.000000 false"
+COMMAND_3_CHANCE=100
+
+# Debug mode
+DEBUG_MODE=True
+```
+
+### CSV File (account_log.csv)
+
+Create a `account_log.csv` file in the same directory as the bot script. This file tracks rewards for players and ensures they do not exceed daily limits.
+
+Initial content of `account_log.csv`:
+
+```account_log.csv
+s_account_uid,from_nick,Date,Status
+```
+- **s_account_uid:** Player's account ID.
+- **from_nick:** Player's username.
+- **Date:** Last date the reward was claimed.
+- **Status:** 0 for active users, non-zero values for banned users.
+
+### Log Files Directory
+
+Ensure the chat log directory (LOG_DIRECTORY) specified in the .env file exists and contains server chat logs.
+
+Chat logs are saved by default in `MatrixServerTool/chat_logs`. Here you can also find the `channel` ID for the `.env` `CHANNELS` setting, find example `gid":"f5161ce4932000` where `gid` is `ID` for `CHANNEL`.
+
+---
+
+## Running the Bot
+
+Run the script using the following command:
+
+```cmd run command
+python reward.py
+```
+
+The bot will:
+
+* Monitor chat logs in real-time.
+* Process the /reward command when detected.
+* Grant rewards to players based on the specified commands and chances.
+
+---
+
+## Code Explanation
+
+**Key Features**
+
+* Environment Configuration: The bot loads all settings from a .env file for easy configuration.
+* Log Monitoring: Reads the latest chat logs in real-time to detect commands.
+* Reward Management: Ensures players receive rewards only once per day.
+* Discord Notifications: Sends reward messages to a Discord channel.
+* RCON Integration: Executes game commands securely using mcrcon.
+
+**Main Functions**
+
+* initialize_csv(): Initializes the account_log.csv file if it doesn't exist.
+* watch_log_file(directory): Continuously monitors the latest log file for changes.
+* process_line(line): Processes a single log entry to check for /reward commands.
+* execute_commands(channel_friendly_name, s_account_uid): Executes configured RCON commands based on random chances.
+* send_to_discord(from_nick, content): Sends reward messages to a Discord channel.
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Bot doesn't detect commands:**
+
+Ensure the log directory in the .env file is correct.
+Check if the bot has read permissions for the log files.
+
+**Rewards are not granted:**
+
+Verify the RCON details (IP, Port, Password) in the .env file.
+Check the format of commands in the .env file (e.g., {s_account_uid} placeholder).
+
+**Discord notifications fail:**
+
+Confirm the Discord webhook URL is correct.
+Check the Discord server permissions for the webhook.
+
+**Database connection issues:**
+
+Verify the database credentials and collation in the .env file.
+
+---
+
+## Additional Notes
+
+Use the DEBUG_MODE variable in the .env file to enable detailed logs for troubleshooting.
+
+You can add as many channels as needed by incrementing the CHANNEL_XXX_IP, CHANNEL_XXX_PORT, CHANNEL_XXX_RCON_PASSWORD values in the .env file.
+
+You can add as many commands as needed by incrementing the COMMAND_X and COMMAND_X_CHANCE values in the .env file.
+
+---
