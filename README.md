@@ -33,9 +33,10 @@ The bot also supports custom configurations through a `.env` file for database c
 ## Prerequisites
 
 1. Python 3.8 or higher installed on your machine.
-2. Required Python packages installed (use `pip install -r requirements.txt` if a `requirements.txt` file is created).
-3. `mcrcon.exe` placed in the bot directory (for RCON command execution).
-4. A `.env` file properly configured (see below).
+2. Myth of Empires with RCON and MySQL configured.
+3. Required Python packages installed (use `pip install -r requirements.txt`).
+4. `mcrcon.exe` placed in the bot directory (for RCON command execution).
+5. A `.env` file properly configured (see below).
 
 ---
 
