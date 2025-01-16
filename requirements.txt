@@ -1,0 +1,6 @@
+python-dotenv
+mcrcon
+pandas
+watchdog
+mysql-connector-python
+requests
