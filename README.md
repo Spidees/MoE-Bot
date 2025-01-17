@@ -15,6 +15,8 @@ This wiki provides documentation for setting up and running the Python-based rew
 - [Running the Bot](#running-the-bot)
 - [Code Explanation](#code-explanation)
 - [Troubleshooting](#troubleshooting)
+- [Additional Notes](#additional-notes)
+- [Support me](#support-me)
 
 ---
 
@@ -184,3 +186,12 @@ You can add as many channels as needed by incrementing the CHANNEL_XXX_IP, CHANN
 You can add as many commands as needed by incrementing the COMMAND_X and COMMAND_X_CHANCE values in the .env file.
 
 ---
+
+## Support Me 
+ 
+🙌 If you enjoy my work and want to support me, you can do so on:  
+
+[![Ko-fi Badge](https://img.shields.io/badge/Support%20me%20on-Ko--fi-ff5e5b?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/playhub)  
+[![PayPal Badge](https://img.shields.io/badge/Donate-PayPal-0070ba?style=flat&logo=paypal&logoColor=white)](https://paypal.me/spidees)
+
+Thank you for your support! ❤️
