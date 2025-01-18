@@ -37,6 +37,9 @@ for channel in channels_raw:
 
 local_channels = list(channel_names.keys())
 
+# Vriable to enable/disable Discord messaging
+ENABLE_DISCORD = os.getenv('ENABLE_DISCORD', 'True') == 'True'
+
 # Discord webhook URL
 webhook_url = os.getenv('DISCORD_WEBHOOK')
 
@@ -241,9 +244,12 @@ def process_line(line):
     except json.JSONDecodeError as e:
         debug_log(f"Error decoding JSON: {e}")
 
-
 # Function to send a message to Discord
 def send_to_discord(from_nick, content):
+    if not ENABLE_DISCORD:
+        debug_log("Discord messaging is disabled. Skipping message.")
+        return
+
     def escape_markdown(text):
         markdown_chars = ['\\', '*', '_', '~', '`', '>', '|']
         for char in markdown_chars:
@@ -258,9 +264,13 @@ def send_to_discord(from_nick, content):
     content = truncate_message(content)
     message = f"{from_nick}: {content}"
     data = {"content": message}
-    response = requests.post(webhook_url, json=data)
-    if response.status_code != 204:
-        debug_log(f"Error sending message to Discord: {response.status_code} - {response.text}")
+    
+    if webhook_url:
+        response = requests.post(webhook_url, json=data)
+        if response.status_code != 204:
+            debug_log(f"Error sending message to Discord: {response.status_code} - {response.text}")
+    else:
+        debug_log("Webhook URL is not defined. Skipping Discord message.")
 
 # Function to find the latest log file in the directory
 def find_latest_file(directory):
