@@ -11,6 +11,9 @@ CHANNEL_102_IP="192.168.2.100"
 CHANNEL_102_PORT="5032"
 CHANNEL_102_RCON_PASSWORD="password"
 
+# Enable or disable sending message to Discord
+ENABLE_DISCORD=True
+
 # Discord webhook
 DISCORD_WEBHOOK="https://discord.com/api/webhooks/"
 
