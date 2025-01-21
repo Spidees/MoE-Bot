@@ -50,6 +50,7 @@ Create a `.env` file in the root directory of the bot. Here's an example configu
 
 ```dotenv
 # Channels and their friendly names
+# Example: f37d4ffd832000=101
 CHANNELS="f37d4ffd832000=101,f5161ce4932000=102"
 
 # Mapping of channels to IP addresses and ports
@@ -80,10 +81,22 @@ DB_COLLATION="utf8mb4_general_ci"
 # Path to the log files
 LOG_DIRECTORY="C:/serverfiles/MatrixServerTool/chat_logs/"
 
-# Reward command for the bot
+# Command for the bot
 REWARD_COMMAND="/reward"
 
-# RCON commands for the bot
+# Discord message template
+# Available shortcodes: {command} , {nick} , {channel}
+
+DISCORD_MESSAGE_TEMPLATE="{nick} received their daily reward by typing {command} in the chat."
+
+# RCON commands for the bot, you must add {s_account_uid}, it is id of player
+# 
+# Example: 
+# COMMAND_1="AddItemToPlayer {s_account_uid} 5412 1 1 1 -1 1.000000 false"
+# COMMAND_1_CHANCE=100
+# 
+# You can add how much commands you want
+
 COMMAND_1="AddCopper {s_account_uid} 10000"
 COMMAND_1_CHANCE=100
 
@@ -93,8 +106,9 @@ COMMAND_2_CHANCE=100
 COMMAND_3="AddItemToPlayer {s_account_uid} 4905 1 1 1 -1 1.000000 false"
 COMMAND_3_CHANCE=100
 
-# Debug mode
+# Set to True to enable debugging
 DEBUG_MODE=True
+
 ```
 
 ### CSV File (account_log.csv)
