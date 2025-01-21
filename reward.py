@@ -130,8 +130,9 @@ def process_account(account_id, from_nick, to_channel):
     # Get the friendly name of the channel
     channel_friendly_name = channel_names.get(to_channel, "Unknown Channel")
 
-    # Load reward command from ENV
-    reward_command = os.getenv('REWARD_COMMAND')
+    # Load reward command and message template from ENV
+    reward_command = os.getenv('REWARD_COMMAND', '!reward')
+    message_template = os.getenv('DISCORD_MESSAGE_TEMPLATE', "Received their daily reward by typing {command} in the chat.")
 
     try:
         with open(csv_file_path, 'r', newline='') as csvfile:
@@ -151,7 +152,8 @@ def process_account(account_id, from_nick, to_channel):
                         row[2] = today
                         debug_log(f"Date for user {from_nick} is updated to today.")
                         execute_commands(channel_friendly_name, account_id)
-                        send_to_discord(from_nick, f"Received their daily reward by typing {reward_command} in the chat.")
+                        message = message_template.format(command=reward_command, nick=from_nick, channel=channel_friendly_name)
+                        send_to_discord(from_nick, message)
                 accounts.append(row)
 
         with open(csv_file_path, 'w', newline='') as csvfile:
@@ -162,7 +164,8 @@ def process_account(account_id, from_nick, to_channel):
                 writer.writerow([account_id, from_nick, today, '0'])
                 debug_log(f"Record for user {from_nick} has been added.")
                 execute_commands(channel_friendly_name, account_id)
-                send_to_discord(from_nick, f"Received their daily reward by typing {reward_command} in the chat.")
+                message = message_template.format(command=reward_command, nick=from_nick, channel=channel_friendly_name)
+                send_to_discord(from_nick, message)
 
     except IOError as e:
         debug_log(f"IOError while processing account: {e}")
