@@ -43,9 +43,6 @@ ENABLE_DISCORD = os.getenv('ENABLE_DISCORD', 'True') == 'True'
 # Discord webhook URL
 webhook_url = os.getenv('DISCORD_WEBHOOK')
 
-# RCON password
-rcon_password = os.getenv('RCON_PASSWORD')
-
 # Path to CSV file
 csv_file_path = 'account_log.csv'
 
