@@ -338,8 +338,8 @@ if ENABLE_REWARD_SYSTEM:
         else:
             debug_log("Webhook URL is not defined. Skipping Discord message.")
 
-    else:
-        debug_log("[INFO] Reward system is disabled.")        
+else:
+    debug_log("[INFO] Reward system is disabled.")        
 
 # CHAT TO DISCORD
 
