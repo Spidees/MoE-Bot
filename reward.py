@@ -79,7 +79,10 @@ def watch_log_file(directory):
 
             if lines:
                 for line in lines:
-                    process_line(line)
+                    if ENABLE_REWARD_SYSTEM:
+                        process_line(line)
+                    if ENABLE_CHAT_TO_DISCORD:
+                        process_chat_line(line)    
 
         except Exception as e:
             debug_log(f"Error reading file: {e}")
