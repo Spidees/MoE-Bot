@@ -393,7 +393,7 @@ if ENABLE_CHAT_TO_DISCORD:
             to_channel = log_entry.get("to")
             if to_channel in chat_channel_names:
                 server_name = chat_channel_names.get(to_channel, "Unknown Server")
-                chat_nick = log_entry.get("from_nick", "Unknown")
+                chat_nick = log_entry.get("from nick", "Unknown")
                 chat_content = log_entry.get("content", "")
 
                 # Check if reward system is enabled and chat contains the reward command
@@ -405,7 +405,7 @@ if ENABLE_CHAT_TO_DISCORD:
 
                 if "^^&&" in chat_content:
                     guild_name, chat_message = chat_content.split("^^&&", 1)
-                    chat_nick = f"<{guild_name}>{chat_nick}"
+                    chat_nick = f"<{guild_name}> {chat_nick}"
                 else:
                     chat_message = chat_content
 
