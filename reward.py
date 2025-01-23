@@ -396,6 +396,13 @@ if ENABLE_CHAT_TO_DISCORD:
                 chat_nick = log_entry.get("from_nick", "Unknown")
                 chat_content = log_entry.get("content", "")
 
+                # Check if reward system is enabled and chat contains the reward command
+                if ENABLE_REWARD_SYSTEM:
+                    reward_command = os.getenv('REWARD_COMMAND', '/reward')
+                    if reward_command in chat_content:
+                        debug_log(f"Skipping message containing reward command: {chat_content}")
+                        return  # Skip processing this line for Chat to Discord
+
                 if "^^&&" in chat_content:
                     guild_name, chat_message = chat_content.split("^^&&", 1)
                     chat_nick = f"<{guild_name}>{chat_nick}"
