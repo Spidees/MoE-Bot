@@ -1,0 +1,74 @@
+{"conn id":1009,"err":"read tcp 192.168.2.100:8020-\u003e78.102.104.234:55240: wsarecv: An existing connection was forcibly closed by the remote host.","level":"error","msg":"read packet head failed.","n":0,"role":"chater","time":"2025-01-23T00:08:58+01:00","uid":"36285F6248CE0184C1FF74A7097EEFE6"}
+{"conn id":1009,"level":"info","msg":"connection closed","role":"chater","time":"2025-01-23T00:08:58+01:00","uid":"36285F6248CE0184C1FF74A7097EEFE6"}
+{"conn id":1009,"level":"error","msg":"output:close signal received.","role":"chater","time":"2025-01-23T00:08:58+01:00","uid":"36285F6248CE0184C1FF74A7097EEFE6"}
+{"conn id":9,"level":"info","msg":"lift the ban user","time":"2025-01-23T01:02:11+01:00"}
+{"conn id":9,"level":"info","msg":"lift the ban user","time":"2025-01-23T01:02:11+01:00"}
+{"addr":"78.80.91.86:55772","conn id":1019,"level":"info","msg":"new connection","role":"chater","time":"2025-01-23T01:02:11+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"gid":"f37d4fed432000","level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:12+01:00"}
+{"combin msg len":200,"level":"info","msg":"send to cluster","msg id":147,"msg len":268,"raw msg head":20,"raw msg len":180,"time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"gid":"f37d4fed4b2000","level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:12+01:00"}
+{"combin msg len":200,"level":"info","msg":"send to cluster","msg id":147,"msg len":268,"raw msg head":20,"raw msg len":180,"time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"gid":"f37d5f588b2000","level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:12+01:00"}
+{"combin msg len":228,"level":"info","msg":"send to cluster","msg id":147,"msg len":296,"raw msg head":20,"raw msg len":208,"time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"gid":"f9702fb0c32000","level":"info","msg":"join group","time":"2025-01-23T01:02:12+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:12+01:00"}
+{"combin msg len":228,"level":"info","msg":"send to cluster","msg id":147,"msg len":296,"raw msg head":20,"raw msg len":208,"time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":1019,"level":"info","msg":"sign in","time":"2025-01-23T01:02:12+01:00"}
+{"conn id":1019,"level":"info","msg":"sign in ok, user online","nick":"Spidees","time":"2025-01-23T01:02:12+01:00","uid":"179634F748BED13A36C4A69BADA24D73","via":"chater"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"gid":"f37d4fed432000","level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"gid":"f37d4fed4b2000","level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"gid":"f37d5f588b2000","level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"gid":"f9702fb0c32000","level":"info","msg":"join group","time":"2025-01-23T01:02:15+01:00","uid":"179634F748BED13A36C4A69BADA24D73"}
+{"conn id":9,"level":"info","msg":"join group, db done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, client done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, user done","time":"2025-01-23T01:02:15+01:00"}
+{"conn id":9,"level":"info","msg":"join group, other users done","time":"2025-01-23T01:02:15+01:00"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026/playhub","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:03:38+01:00","to":"f37d4fed432000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026/playhub","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:04:23+01:00","to":"f37d4fed432000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026test","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:06:46+01:00","to":"f37d4fed432000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026test","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:08:57+01:00","to":"f37d4fed432000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026/test","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:10:47+01:00","to":"f37d4fed432000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026/playhub","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:14:47+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026aaaa","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:15:12+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026aaaa","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:19:38+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026a","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:23:37+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026aaa","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:24:09+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026a","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:24:10+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026a","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:24:10+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026a","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:24:10+01:00","to":"f37d4fed4b2000"}
+{"addr":"78.80.91.86:55772","conn id":1019,"content":"Bambusový Klan^^\u0026\u0026aaa","content type":1,"conv type":2,"from":"179634F748BED13A36C4A69BADA24D73","from nick":"Spidees","level":"info","msg":"chat msg","role":"chater","time":"2025-01-23T01:24:11+01:00","to":"f37d4fed4b2000"}
