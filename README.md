@@ -1,6 +1,11 @@
-# Myth of Empires Python Reward Bot
+# Myth of Empires Python Bot
 
-This wiki provides documentation for setting up and running the Python-based reward bot for **Myth of Empires**. The bot monitors chat logs for reward commands and executes RCON commands to reward players.
+This wiki provides documentation for setting up and running the Python-based bot for **Myth of Empires**.
+
+Main feature:
+1. Daily Reward System - The bot monitors chat logs for reward commands and executes RCON commands to reward players.
+2. Ingame Chat to Discord - The bot monitors chat logs and sending ingame chat to Discord.
+3. Server Status - TODO
 
 ---
 
@@ -27,8 +32,10 @@ The reward bot is designed to:
 2. Detect when players type the `/reward` command.
 3. Execute RCON commands to grant rewards (e.g., items, resources).
 4. Log rewards in a CSV file to ensure daily limits are respected.
+5. Sending discord reward confirmation messages.
+6. Sending ingame chat to Discord
 
-The bot also supports custom configurations through a `.env` file for database connections, commands, and Discord webhooks.
+The bot also supports custom configurations through a `.env` file for database connections, commands, and discord webhooks etc..
 
 ---
 
@@ -204,6 +211,7 @@ The bot will:
 * Monitor chat logs in real-time.
 * Process the /reward command when detected.
 * Grant rewards to players based on the specified commands and chances.
+* Send messages to Discord.
 
 ---
 
