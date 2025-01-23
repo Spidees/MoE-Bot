@@ -219,7 +219,7 @@ if ENABLE_REWARD_SYSTEM:
                             debug_log(f"Date for user {from_nick} is updated to today.")
                             execute_commands(channel_friendly_name, account_id)
                             message = message_template.format(command=reward_command, nick=from_nick, channel=channel_friendly_name)
-                            send_to_discord(message)
+                            send_to_discord(from_nick, message)
                     accounts.append(row)
 
             with open(csv_file_path, 'w', newline='') as csvfile:
@@ -231,7 +231,7 @@ if ENABLE_REWARD_SYSTEM:
                     debug_log(f"Record for user {from_nick} has been added.")
                     execute_commands(channel_friendly_name, account_id)
                     message = message_template.format(command=reward_command, nick=from_nick, channel=channel_friendly_name)
-                    send_to_discord(message)
+                    send_to_discord(from_nick, message)
 
         except IOError as e:
             debug_log(f"IOError while processing account: {e}")
@@ -328,7 +328,7 @@ if ENABLE_REWARD_SYSTEM:
         from_nick = escape_markdown(from_nick)
         content = escape_markdown(content)
         content = truncate_message(content)
-        message = f"{from_nick}: {content}"
+        message = f"{content}"
         data = {"content": message}
     
         if webhook_url:
@@ -390,7 +390,7 @@ if ENABLE_CHAT_TO_DISCORD:
             to_channel = log_entry.get("to")
             if to_channel in chat_channel_names:
                 server_name = chat_channel_names.get(to_channel, "Unknown Server")
-                chat_nick = log_entry.get("from nick", "Unknown")
+                chat_nick = log_entry.get("from_nick", "Unknown")
                 chat_content = log_entry.get("content", "")
 
                 if "^^&&" in chat_content:
@@ -402,9 +402,6 @@ if ENABLE_CHAT_TO_DISCORD:
                 send_chat_to_discord(server_name, chat_nick, chat_message)
         except json.JSONDecodeError as e:
             debug_log(f"Error decoding JSON in chat line: {e}")
-
-    # Start watching the log file for chat messages
-    watch_log_file(log_directory)
 else:
     debug_log("[INFO] Chat to Discord integration is disabled.")
 
