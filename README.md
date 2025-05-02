@@ -278,6 +278,15 @@ python bot.py
 
 ---
 
+## 💬 Community & Contact
+
+Got questions, feedback, or just want to hang out?  
+You can contact me or join the community here:
+
+[![Discord Badge](https://img.shields.io/badge/Join%20us%20on-Discord-5865F2?style=flat&logo=discord&logoColor=white)](https://playhub.cz/discord)
+
+---
+
 ## 🙌 Support
 
 If you enjoy this project, consider supporting:
