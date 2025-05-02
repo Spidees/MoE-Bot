@@ -35,7 +35,7 @@ The reward bot is designed to:
 5. Sending discord reward confirmation messages.
 6. Sending ingame chat to Discord
 
-The bot also supports custom configurations through a `.env` file for database connections, commands, and discord webhooks etc..
+The bot also supports custom configurations through a `.env` file for database connections, commands, and discord token etc..
 
 ---
 
