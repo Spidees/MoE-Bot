@@ -159,18 +159,36 @@ BATTLE_SERVER_3=51.51.51.51:5010
 BATTLE_SERVER_4=51.51.51.51:5010
 
 # Optional: Status labels for different game modes or servers
-TOTAL_PLAYERS=Total Players Online
-CENTRAL_MAIN=Island Dongzhou
-CENTRAL2_MAIN=Zhongzhou
-DESERT_MAIN=Xizhou
-BATTLEFIELD_MAIN_NEW=Plain
-BATTLEFIELD_GEORGE_MAIN=Gobi Canyon
-COUNTYTOWN_MAIN=County town
-COUNTYTOWN_MAIN_SPECIAL=Castle siege
-NEWYER_01_MAIN=New Years event
-RACEHORSE01_MAIN=Horse racing
-PREFECTUREWAR_MAIN_SPECIAL=Prefecture Battle
-WAROFTHEPASS_MAIN_SPECIAL=Fortress Battle
+
+LOGIN_SERVER_NAME=Login
+CLUSTER_SERVER_1_NAME=Cluster 1
+CLUSTER_SERVER_2_NAME=Cluster 2
+CLUSTER_SERVER_3_NAME=Cluster 3
+BATTLE_SERVER_1_NAME=Battle 1
+BATTLE_SERVER_2_NAME=Battle 2
+BATTLE_SERVER_3_NAME=Battle 3
+
+EMBED_COLOR=#00ff00
+EMBED_LABEL_TITLE=MYTH OF EMPIRES SERVER STATUS
+
+TOTAL_PLAYERS=TOTAL PLAYERS ONLINE
+MAP_TITLE=Map
+TYPE_TITLE=Type
+OFFLINE_DESCRIPTIONS=server is currently offline or not found.
+
+Map_Lobby=Lobby
+LargeTerrain_Central2_Main=Island Dongzhou
+LargeTerrain_Central_Main=Zhongzhou
+LargeTerrain_Desert_Main=Xizhou
+Battlefield_Main_New=Plain
+Battlefield_Gorge_Main=Gobi Canyon
+CountyTown_Main=County town
+CountyTown_Main_Special=Castle siege
+Newyear_01_Main=New Years event
+Racehorse_01_Main=Horse racing
+Prefecturewar_Main_Special=Prefecture Battle
+WarOfThePass_Main_Special=Fortress Battle
+
 PVP=PvP
 PVE=PvE
 
@@ -180,7 +198,6 @@ PVE=PvE
 
 # Set to True to enable debugging
 DEBUG_MODE=True
-
 
 ```
 
