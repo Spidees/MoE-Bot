@@ -1,22 +1,28 @@
 #!/usr/bin/python3
-import time
-import json
+import os
 import re
+import csv
+import glob
+import json
+import time
+import random
+import sqlite3
+import subprocess
+from datetime import datetime
+import threading
+
+# 3rd party
+import requests
+import discord
+import asyncio
+import mysql.connector
+from mysql.connector import Error
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
-import os
-import glob
-import sqlite3
-import csv
-from datetime import datetime
-import requests
-
 # ========== DISCORD BOT (TOKEN-BASED, MULTI-CHANNEL) ==========
-import discord
-import asyncio
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 CHANNEL_MAP = {
@@ -68,11 +74,6 @@ async def start_discord_bot():
     await discord_client.start(TOKEN)
 
 # ========== END DISCORD BLOCK ==========
-
-import subprocess
-import mysql.connector
-from mysql.connector import Error
-import random
 
 # Read DEBUG_MODE value (controls debug logs)
 DEBUG_MODE = os.getenv('DEBUG_MODE', 'False') == 'True'
@@ -528,7 +529,6 @@ async def update_server_status_loop():
             except ValueError:
                 embed_color = discord.Color.green()
 
-            from datetime import datetime
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             embed = discord.Embed(
@@ -558,22 +558,109 @@ async def update_server_status_loop():
         await asyncio.sleep(60)
 
 if not ENABLE_SERVER_STATUS:
-    debug_log("[INFO] Server status integration is disabled.")
+    debug_log("[INFO] Server status integration is disasbled.")
+    
+# ANNOUNCEMENT SYSTEM
+
+announcement_file = "announcement.txt"
+
+ENABLE_SERVER_ANNOUNCEMENTS = os.getenv('ENABLE_SERVER_ANNOUNCEMENTS', 'False') == 'True'
+
+# Parse announcement.txt into structured blocks
+def parse_announcements(file_path):
+    if not os.path.exists(file_path):
+        debug_log("Announcement file does not exist.")
+        return []
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
+    announcements = []
+    block = {}
+
+    for line in lines:
+        line = line.strip()
+        if line.startswith("# --- announcement ---"):
+            block = {}
+        elif line.startswith("# --- end ---"):
+            if "text" in block and "interval" in block and "servers" in block:
+                block["interval"] = int(block["interval"])
+                block["servers"] = block["servers"].split(",")
+                announcements.append(block)
+        elif "=" in line:
+            key, value = line.split("=", 1)
+            block[key.strip()] = value.strip()
+
+    debug_log(f"Parsed {len(announcements)} announcement blocks.")
+    return announcements
+
+# Send announcement text to specified servers using RCON
+def send_announcement_to_servers(text, target_server_ids):
+    for channel_id, friendly_name in channel_names.items():
+        if friendly_name not in target_server_ids:
+            continue
+
+        ip = os.getenv(f'CHANNEL_{friendly_name}_IP')
+        port = os.getenv(f'CHANNEL_{friendly_name}_PORT')
+        rcon_password = os.getenv(f'CHANNEL_{friendly_name}_RCON_PASSWORD')
+
+        if not ip or not port or not rcon_password:
+            debug_log(f"Missing RCON configuration for channel: {friendly_name}")
+            continue
+
+        command = [
+            'mcrcon.exe',
+            '-H', ip,
+            '-P', port,
+            '-p', rcon_password,
+            '-w', '5',
+            f'BroadcastNotifySysInfo "{text}" 1 0'
+        ]
+
+        try:
+            debug_log(f"Executed announcement command: {' '.join(command)}")
+            subprocess.run(command, check=True, timeout=5)
+        except Exception as e:
+            debug_log(f"Error executing announcement command: {e}")
+
+# Async loop that manages timing and sending of announcements
+async def announcement_loop():
+    if not ENABLE_SERVER_ANNOUNCEMENTS:
+        debug_log("Server announcements are disabled.")
+        return
+
+    announcements = parse_announcements(announcement_file)
+    if not announcements:
+        debug_log("No announcements loaded. Skipping loop.")
+        return
+
+    last_sent = [0] * len(announcements)
+
+    while True:
+        now = time.time()
+
+        for i, anonce in enumerate(announcements):
+            if now - last_sent[i] >= anonce["interval"]:
+                send_announcement_to_servers(anonce["text"], anonce["servers"])
+                last_sent[i] = now
+
+        await asyncio.sleep(1)
 
 # Main function starts the log monitoring
-import asyncio
-
 if __name__ == "__main__":
     debug_log("[INFO] Script is running...")
 
-    import threading
-
-    # We will run the Discord bot in a separate thread
     def run_discord():
         asyncio.run(start_discord_bot())
 
     discord_thread = threading.Thread(target=run_discord, daemon=True)
     discord_thread.start()
 
-    # Meanwhile, log monitoring runs synchronously
+    if ENABLE_SERVER_ANNOUNCEMENTS:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.create_task(announcement_loop())
+
+        threading.Thread(target=loop.run_forever, daemon=True).start()
+
     watch_log_file(log_directory)
