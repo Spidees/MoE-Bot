@@ -454,6 +454,8 @@ async def update_server_status_loop():
     type_title = os.getenv("TYPE_TITLE", "Type")
     offline_description = os.getenv("OFFLINE_DESCRIPTIONS", "server is currently offline or not found.")
 
+    enable_presence = os.getenv("ENABLE_DISCORD_PRESENCE", "False") == "True"
+
     server_keys = [
         key for key in os.environ
         if re.match(r"^[A-Z0-9_]+_SERVER(_\d+)?$", key) and not key.endswith("_NAME")
@@ -481,6 +483,7 @@ async def update_server_status_loop():
 
             output_lines = []
             total_online = 0
+            active_server_count = 0
 
             for key in server_keys:
                 address = os.getenv(key)
@@ -509,6 +512,7 @@ async def update_server_status_loop():
                         f"{type_title}: {pvp_label}\n"
                     )
                     total_online += online
+                    active_server_count += 1
                 else:
                     line = (
                         f"**{name}**\n"
@@ -539,10 +543,15 @@ async def update_server_status_loop():
                 else:
                     await channel.send(embed=embed)
 
+            # 🌐 Update Discord presence if enabled
+            if enable_presence:
+                presence_text = f"{active_server_count} servers | {total_online} players"
+                await discord_client.change_presence(activity=discord.Game(name=presence_text))
+
         except Exception as e:
             print(f"[ERROR] Server status fetch failed: {e}")
 
-        await asyncio.sleep(300)
+        await asyncio.sleep(60)
 
 if not ENABLE_SERVER_STATUS:
     debug_log("[INFO] Server status integration is disabled.")
