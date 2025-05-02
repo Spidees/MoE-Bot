@@ -15,6 +15,8 @@ A multifunctional Discord bot for Myth of Empires, built for private servers to:
 ### 💬 Chat to Discord
 - Forwards in-game chat messages to a specific Discord channel
 - Handles custom formatting with guild tags and nickname
+  
+![Screenshot](https://playhub.cz/github/discord_chat.png)
 
 ### 🎁 Reward System
 - Players can use `/reward` (or custom command) in-game to trigger a reward
@@ -31,11 +33,15 @@ A multifunctional Discord bot for Myth of Empires, built for private servers to:
   - PvP or PvE mode
   - Offline indicator with custom message
 - Fully configurable in `.env` file
+  
+![Screenshot](https://playhub.cz/github/moe_status.png)
 
 ### 🟢 Discord Presence Update
 - Automatically updates bot presence
 - Format: `"X servers | Y players"`
 - Can be toggled via `.env`
+
+![Screenshot](https://playhub.cz/github/moe_status_perser.png)
 
 ### 📣 Server Announcements
 - Automatically sends announcements to in-game chat using RCON
