@@ -6,6 +6,7 @@ A multifunctional Discord bot for Myth of Empires, built for private servers to:
 - Reward players for using in-game commands (with RCON execution)
 - Show server statuses from the official API (player count, map, type, etc.)
 - Display current status in Discord presence ("X servers | Y players")
+- Announcements to in-game chat using RCON
 
 ---
 
@@ -35,6 +36,15 @@ A multifunctional Discord bot for Myth of Empires, built for private servers to:
 - Automatically updates bot presence
 - Format: `"X servers | Y players"`
 - Can be toggled via `.env`
+
+### 📣 Server Announcements
+- Automatically sends announcements to in-game chat using RCON
+- Messages, intervals, and target servers are defined in `announcement.txt`
+- Each announcement block includes:
+  - `text=` – the message content
+  - `interval=` – how often it repeats (in seconds)
+  - `servers=` – list of server IDs to send to (e.g. `101,102`)
+- Can be enabled/disabled using `ENABLE_SERVER_ANNOUNCEMENTS` in `.env`
 
 ### 🧪 Debug Mode
 - Controlled with `DEBUG_MODE=True`
@@ -187,11 +197,36 @@ PVP=PvP
 PVE=PvE
 
 # ╔════════════════════════════════════════════════════════════╗
+#                   SERVER ANNOUNCEMENTS INTEGRATION
+# ╚════════════════════════════════════════════════════════════╝
+
+# Enable or disable server ingame announcements
+ENABLE_SERVER_ANNOUNCEMENTS=True # If True it is necessary to have IP address, port, and RCON password for each channel configured in reward system.
+
+# ╔════════════════════════════════════════════════════════════╗
 #                          DEBUGGING SETTINGS
 # ╚════════════════════════════════════════════════════════════╝
 
 # Set to True to enable debugging
 DEBUG_MODE=True
+```
+
+---
+
+## ⚙️ Example (`announcement.txt`)
+
+```ini
+# --- Announcement 1 ---
+text=Dont forget to join our Discord for updates and events! 
+interval=1800
+servers=101,102,103
+# --- end ---
+
+# --- Announcement 2 ---
+text=Use /reward in chat to claim your daily bonus!
+interval=1980
+servers=101,102,103
+# --- end ---
 ```
 
 ---
