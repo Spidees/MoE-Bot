@@ -61,7 +61,10 @@ Create a `.env` file in the root directory of the bot. Here's an example configu
 # ╚════════════════════════════════════════════════════════════╝
 
 # Path to the chat log files
-LOG_DIRECTORY="C:/serverfiles/MatrixServerTool/chat_logs/"
+LOG_DIRECTORY="C:/Users/Administrator/Desktop/WindowsGSM/servers/5/serverfiles/MatrixServerTool/chat_logs/"
+
+# Enter your discord bot token here
+DISCORD_BOT_TOKEN=fdsafdasf123e45fdsdrefsdfas
 
 # ╔════════════════════════════════════════════════════════════╗
 #                     REWARD SYSTEM INTEGRATION
@@ -71,9 +74,10 @@ LOG_DIRECTORY="C:/serverfiles/MatrixServerTool/chat_logs/"
 ENABLE_REWARD_SYSTEM=True
 
 # MySQL Database parameters
+
 DB_HOST="127.0.0.1"
 DB_USER="moediscord"
-DB_PASSWORD="moediscord"
+DB_PASSWORD="12d1e0S1edEWrD"
 DB_DATABASE="moe_role"
 DB_COLLATION="utf8mb4_general_ci"
 
@@ -85,55 +89,182 @@ csv_file_path="account_log.csv"
 
 # Mapping of channels and their friendly names
 # Format: channel_id=friendly_name
-CHANNELS="f37d4ffd832000=101,f5161ce4932000=102"
+CHANNELS="132d7951a8b2000=301,132d7951a832000=3011,132d795eba32000=302,132d795eba32010=3022,132d79f50a32000=303,132d79f50ab2000=3033"
 
 # Define the IP address, port, and RCON password for each channel
-CHANNEL_101_IP="192.168.2.100"
-CHANNEL_101_PORT="5030"
-CHANNEL_101_RCON_PASSWORD="password"
+CHANNEL_301_IP="192.168.2.100"
+CHANNEL_301_PORT="5030"
+CHANNEL_301_RCON_PASSWORD="331343"
 
-CHANNEL_102_IP="192.168.2.100"
-CHANNEL_102_PORT="5032"
-CHANNEL_102_RCON_PASSWORD="password"
+CHANNEL_3011_IP="192.168.2.100"
+CHANNEL_3011_PORT="5030"
+CHANNEL_3011_RCON_PASSWORD="331343"
+
+CHANNEL_302_IP="192.168.2.100"
+CHANNEL_302_PORT="5031"
+CHANNEL_302_RCON_PASSWORD="331343"
+
+CHANNEL_3022_IP="192.168.2.100"
+CHANNEL_3022_PORT="5031"
+CHANNEL_3022_RCON_PASSWORD="331343"
+
+CHANNEL_303_IP="192.168.2.100"
+CHANNEL_303_PORT="5032"
+CHANNEL_303_RCON_PASSWORD="331343"
+
+CHANNEL_3033_IP="192.168.2.100"
+CHANNEL_3033_PORT="5032"
+CHANNEL_3033_RCON_PASSWORD="331343"
 
 # Define RCON commands with a chance of execution (0-100%)
 # {s_account_uid} will be replaced by the player’s ID
 
+# Boost měna
 COMMAND_1="AddCopper {s_account_uid} 10000"
 COMMAND_1_CHANCE=100
 
+# Treasure Key
 COMMAND_2="AddItemToPlayer {s_account_uid} 5412 1 1 1 -1 1.000000 false"
 COMMAND_2_CHANCE=100
 
+# Kaprové svícny
 COMMAND_3="AddItemToPlayer {s_account_uid} 4905 1 1 1 -1 1.000000 false"
-COMMAND_3_CHANCE=100
+COMMAND_3_CHANCE=1
+
+# Kaprové svícny
+COMMAND_4="AddItemToPlayer {s_account_uid} 4794 1 1 1 -1 1.000000 false"
+COMMAND_4_CHANCE=1
+
+# Kaprí lucerna
+COMMAND_5="AddItemToPlayer {s_account_uid} 4906 1 1 1 -1 1.000000 false"
+COMMAND_5_CHANCE=1
+
+# Zlatá rybka lucerna
+COMMAND_6="AddItemToPlayer {s_account_uid} 4907 1 1 1 -1 1.000000 false"
+COMMAND_6_CHANCE=1
+
+# Kaprí lucerna
+COMMAND_7="AddItemToPlayer {s_account_uid} 4771 1 1 1 -1 1.000000 false"
+COMMAND_7_CHANCE=1
+
+# Zlatá rybka lucerna
+COMMAND_8="AddItemToPlayer {s_account_uid} 4772 1 1 1 -1 1.000000 false"
+COMMAND_8_CHANCE=1
+
+# Multifunkční nářadí
+COMMAND_9="AddItemToPlayer {s_account_uid} 4521 1 6 1 -1 1.000000 false"
+COMMAND_9_CHANCE=100
+
+# Novoroční dekorace
+COMMAND_10="AddItemToPlayer {s_account_uid} 3887 1 1 1 -1 1.000000 false"
+COMMAND_10_CHANCE=1
+
+# Lucerna briliantní budoucnosti
+COMMAND_11="AddItemToPlayer {s_account_uid} 3886 1 1 1 -1 1.000000 false"
+COMMAND_11_CHANCE=1
+
+# Lucerna štěstí a prosperity
+COMMAND_12="AddItemToPlayer {s_account_uid} 3885 1 1 1 -1 1.000000 false"
+COMMAND_12_CHANCE=1
+
+# Lucerna přání všeho nejlepšího
+COMMAND_13="AddItemToPlayer {s_account_uid} 3884 1 1 1 -1 1.000000 false"
+COMMAND_13_CHANCE=1
+
+# Postel-bang výbušná žabka
+COMMAND_14="AddItemToPlayer {s_account_uid} 3880 1 1 1 -1 1.000000 false"
+COMMAND_14_CHANCE=10
+
+# Výbušné žabky
+COMMAND_15="AddItemToPlayer {s_account_uid} 3881 1 1 1 -1 1.000000 false"
+COMMAND_15_CHANCE=10
+
+# Ohňostroj Zářivé květiny
+COMMAND_16="AddItemToPlayer {s_account_uid} 3853 1 1 1 -1 1.000000 false"
+COMMAND_16_CHANCE=15
+
+# Ohňostroj Sto květin
+COMMAND_17="AddItemToPlayer {s_account_uid} 3854 1 1 1 -1 1.000000 false"
+COMMAND_17_CHANCE=15
+
+# Ohňostroj Fialová a červená
+COMMAND_18="AddItemToPlayer {s_account_uid} 3855 1 1 1 -1 1.000000 false"
+COMMAND_18_CHANCE=15
+
+# Ohňostroj Bezesná noc
+COMMAND_19="AddItemToPlayer {s_account_uid} 3856 1 1 1 -1 1.000000 false"
+COMMAND_19_CHANCE=15
+
+# Výbušné žabky
+COMMAND_20="AddItemToPlayer {s_account_uid} 3850 1 1 1 -1 1.000000 false"
+COMMAND_20_CHANCE=10
+
+# Nekonečný uzel
+COMMAND_21="AddItemToPlayer {s_account_uid} 3845 1 1 1 -1 1.000000 false"
+COMMAND_21_CHANCE=1
+
+# Lucerna
+COMMAND_22="AddItemToPlayer {s_account_uid} 3844 1 1 1 -1 1.000000 false"
+COMMAND_22_CHANCE=1
+
+# Ohňostroj Jumping Jacks
+COMMAND_23="AddItemToPlayer {s_account_uid} 3843 1 1 1 -1 1.000000 false"
+COMMAND_23_CHANCE=10
+
+# Ohňostroj Bezesná noc
+COMMAND_24="AddItemToPlayer {s_account_uid} 3856 1 1 1 -1 1.000000 false"
+COMMAND_24_CHANCE=10
+
+# Kapr
+COMMAND_25="AddItemToPlayer {s_account_uid} 3850 1 1 1 -1 1.000000 false"
+COMMAND_25_CHANCE=5
+
+# Pilulka pro koně
+COMMAND_26="AddItemToPlayer {s_account_uid} 3878 1 1 1 -1 1.000000 false"
+COMMAND_26_CHANCE=3
+
+# Pilulka pro válečníka
+COMMAND_27="AddItemToPlayer {s_account_uid} 3739 1 1 1 -1 1.000000 false"
+COMMAND_27_CHANCE=3
+
+# EXP lékárna
+COMMAND_28="AddItemToPlayer {s_account_uid} 1838 1 1 1 -1 1.000000 false"
+COMMAND_28_CHANCE=100
+
+# Dárková krabička (boost potraviny)
+COMMAND_29="AddItemToPlayer {s_account_uid} 4536 1 1 1 -1 1.000000 false"
+COMMAND_29_CHANCE=100
+
+# Boost dovednosti
+COMMAND_30="AddItemToPlayer {s_account_uid} 4839 1 1 1 -1 1.000000 false"
+COMMAND_30_CHANCE=100
 
 # Enable or disable Discord notifications
-ENABLE_DISCORD=True
+ENABLE_REWARD_TO_DISCORD=True
 
-# Discord webhook URL for sending messages
-DISCORD_WEBHOOK="https://discord.com/api/webhooks/"
+# Discord channel for sending messages
+REWARD_DISCORD_CHANNEL_ID=1367623754548772924
 
 # Template for the Discord message sent when a reward is given
 # Available shortcodes: {command}, {nick}, {channel}
-DISCORD_MESSAGE_TEMPLATE="{nick} received their daily reward by typing {command} in the chat."
+REWARD_DISCORD_MESSAGE_TEMPLATE="**{nick}** received their daily reward by typing **{command}** in the chat."
 
 # ╔════════════════════════════════════════════════════════════╗
 #                   CHAT TO DISCORD INTEGRATION
 # ╚════════════════════════════════════════════════════════════╝
 
 # Enable or disable chat messages being sent to Discord
-ENABLE_CHAT_TO_DISCORD=False
+ENABLE_CHAT_TO_DISCORD=True
 
 # Mapping of channels and their friendly names
-CHAT_CHANNELS="f37d4ffd832000=SERVER1,f5161ce4932000=SERVER2"
+CHAT_CHANNELS="132d7951a8b2000=County 301 | Tan-pa,132d795eba32000=County 302 | Ming-čen,132d79f50a32000=County 303 | Men-pej"
 
-# Discord webhook URL for sending ingame chat
-CHAT_DISCORD_WEBHOOK="https://discord.com/api/webhooks/"
+# Discord channel for sending ingame chat
+CHAT_DISCORD_CHANNEL_ID=1367623754548772924
 
 # Template for the Discord message
 # Available shortcodes: {chat_message}, {server}, {chat_nick}
-CHAT_DISCORD_MESSAGE_TEMPLATE="{server} - {chat_nick}: {chat_message}"
+CHAT_DISCORD_MESSAGE_TEMPLATE="**{server} - {chat_nick}:** {chat_message}"
 
 # ╔════════════════════════════════════════════════════════════╗
 #                   SERVER STATUS TO DISCORD INTEGRATION
@@ -142,28 +273,32 @@ CHAT_DISCORD_MESSAGE_TEMPLATE="{server} - {chat_nick}: {chat_message}"
 # Enable or disable server status messages being sent to Discord
 ENABLE_SERVER_STATUS=False
 
+# Discord channel for sending server status
+STATUS_DISCORD_CHANNEL_ID=1088603624743125125
+
 # IP adress and port game server status
 LOGIN_SERVER=51.51.51.51:7010
-CLUSTER_SERVER=51.51.51.51:5010
+CLUSTER_SERVER_1=51.51.51.51:5010
 CLUSTER_SERVER_2=51.51.51.51:5010
+CLUSTER_SERVER_3=51.51.51.51:5010
 BATTLE_SERVER_1=51.51.51.51:5010
 BATTLE_SERVER_2=51.51.51.51:5010
-
-# Discord webhook URL for server status
-STATUS_DISCORD_WEBHOOK="https://discord.com/api/webhooks/"
+BATTLE_SERVER_3=51.51.51.51:5010
+BATTLE_SERVER_4=51.51.51.51:5010
 
 # Optional: Status labels for different game modes or servers
 TOTAL_PLAYERS=Total Players Online
 CENTRAL_MAIN=Island Dongzhou
 CENTRAL2_MAIN=Zhongzhou
-BATTLEFIELD_MAIN_NEW=  # To be filled with relevant info
-BATTLEFIELD_GEORGE_MAIN=  # To be filled with relevant info
-COUNTYTOWN_MAIN=  # To be filled with relevant info
-COUNTYTOWN_MAIN_SPECIAL=  # To be filled with relevant info
-NEWYER_01_MAIN=  # To be filled with relevant info
-RACEHORSE01_MAIN=  # To be filled with relevant info
-PREFECTUREWAR_MAIN_SPECIAL=  # To be filled with relevant info
-WAROFTHEPASS_MAIN_SPECIAL=  # To be filled with relevant info
+DESERT_MAIN=Xizhou
+BATTLEFIELD_MAIN_NEW=Plain
+BATTLEFIELD_GEORGE_MAIN=Gobi Canyon
+COUNTYTOWN_MAIN=County town
+COUNTYTOWN_MAIN_SPECIAL=Castle siege
+NEWYER_01_MAIN=New Years event
+RACEHORSE01_MAIN=Horse racing
+PREFECTUREWAR_MAIN_SPECIAL=Prefecture Battle
+WAROFTHEPASS_MAIN_SPECIAL=Fortress Battle
 PVP=PvP
 PVE=PvE
 
@@ -173,6 +308,7 @@ PVE=PvE
 
 # Set to True to enable debugging
 DEBUG_MODE=True
+
 
 ```
 
@@ -203,7 +339,7 @@ Chat logs are saved by default in `MatrixServerTool/chat_logs`. Here you can als
 Run the script using the following command:
 
 ```cmd run command
-python reward.py
+python bot.py
 ```
 
 The bot will:
