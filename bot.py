@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import time
 import json
+import re
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -32,6 +33,9 @@ discord_message_queue = asyncio.Queue()
 async def on_ready():
     print(f"Discord bot logged in as {discord_client.user}")
     asyncio.create_task(discord_message_sender())
+
+    if ENABLE_SERVER_STATUS:
+        asyncio.create_task(update_server_status_loop())    
 
 async def discord_message_sender():
     await discord_client.wait_until_ready()
@@ -438,9 +442,109 @@ else:
 # SERVER STATUS
 
 if ENABLE_SERVER_STATUS:
-    debug_log("[INFO] Server status integration is enabled.")    
+    debug_log("[INFO] Server status integration is enabled.")
 
-else:
+async def update_server_status_loop():
+    await discord_client.wait_until_ready()
+    status_channel_id = int(os.getenv("STATUS_DISCORD_CHANNEL_ID", "0"))
+
+    embed_title = os.getenv("EMBED_LABEL_TITLE", "Server Status")
+    total_players_label = os.getenv("TOTAL_PLAYERS", "Total Players Online")
+    map_title = os.getenv("MAP_TITLE", "Map")
+    type_title = os.getenv("TYPE_TITLE", "Type")
+    offline_description = os.getenv("OFFLINE_DESCRIPTIONS", "server is currently offline or not found.")
+
+    server_keys = [
+        key for key in os.environ
+        if re.match(r"^[A-Z0-9_]+_SERVER(_\d+)?$", key) and not key.endswith("_NAME")
+    ]
+    name_mapping = {key: os.getenv(f"{key}_NAME", key) for key in server_keys}
+
+    pvp_types = {
+        "PVP": os.getenv("PVP", "⚔️ PVP"),
+        "PVE": os.getenv("PVE", "🛡️ PVE")
+    }
+
+    urls = [
+        "https://l11-prod-list-moegame.angelagame.com/GameServerList_BigPrivate.json",
+        "https://l11-prod-list-moegame.angelagame.com/GameServerList_Private.json",
+        "https://l11-prod-list-moegame.angelagame.com/GameServerList_Listen.json"
+    ]
+
+    while True:
+        try:
+            server_list = []
+            for url in urls:
+                response = requests.get(url)
+                data = response.json()
+                server_list.extend(data.get("server_list", []))
+
+            output_lines = []
+            total_online = 0
+
+            for key in server_keys:
+                address = os.getenv(key)
+                if not address or ":" not in address:
+                    debug_log(f"[WARNING] Invalid server address format for '{key}': '{address}'")
+                    continue
+                ip, port = address.split(":", 1)
+                server_data = next((s for s in server_list if s.get("addr") == ip and str(s.get("port")) == port), None)
+                name = name_mapping.get(key, key)
+
+                if server_data:
+                    custom_info = json.loads(server_data.get("custom_info", "{}"))
+                    online = int(server_data.get("online", 0))
+                    maxplayers = int(custom_info.get("maxplayer", 100))
+
+                    map_key = custom_info.get("map_name", "")
+                    map_label = os.getenv(map_key, map_key)
+
+                    pvp_key = "PVP" if custom_info.get("pvp_type") == 0 else "PVE"
+                    pvp_label = pvp_types.get(pvp_key, pvp_key)
+
+                    line = (
+                        f"**{name}**\n"
+                        f":green_circle: Online: {online}/{maxplayers}\n"
+                        f"{map_title}: {map_label}\n"
+                        f"{type_title}: {pvp_label}\n"
+                    )
+                    total_online += online
+                else:
+                    line = (
+                        f"**{name}**\n"
+                        f":red_circle: Offline\n"
+                        f"{name} {offline_description}\n"
+                    )
+
+                output_lines.append(line)
+
+            embed_color_str = os.getenv("EMBED_COLOR", "#00ff00").lstrip("#")
+            try:
+                embed_color = discord.Color(int(embed_color_str, 16))
+            except ValueError:
+                embed_color = discord.Color.green()
+
+            embed = discord.Embed(
+            title=embed_title,
+            description=f":people_holding_hands: **{total_players_label}: {total_online}**\n\n" + "\n".join(output_lines),
+            color=embed_color
+            )
+
+            channel = discord_client.get_channel(status_channel_id)
+            if channel:
+                async for message in channel.history(limit=20):
+                    if message.author == discord_client.user and message.embeds:
+                        await message.edit(embed=embed)
+                        break
+                else:
+                    await channel.send(embed=embed)
+
+        except Exception as e:
+            print(f"[ERROR] Server status fetch failed: {e}")
+
+        await asyncio.sleep(300)
+
+if not ENABLE_SERVER_STATUS:
     debug_log("[INFO] Server status integration is disabled.")
 
 # Main function starts the log monitoring
