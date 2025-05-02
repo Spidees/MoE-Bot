@@ -1,6 +1,4 @@
+discord.py
 python-dotenv
-mcrcon
-pandas
-watchdog
-mysql-connector-python
 requests
+mysql-connector-python
