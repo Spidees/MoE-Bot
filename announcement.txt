@@ -1,0 +1,11 @@
+# --- Announcement 1 ---
+text=Don't forget to join our Discord for updates and events! 
+interval=1800
+servers=101,102,103
+# --- end ---
+
+# --- Announcement 2 ---
+text=Use /reward in chat to claim your daily bonus!
+interval=1980
+servers=101,102,103
+# --- end ---
