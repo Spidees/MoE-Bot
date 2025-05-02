@@ -528,11 +528,15 @@ async def update_server_status_loop():
             except ValueError:
                 embed_color = discord.Color.green()
 
+            from datetime import datetime
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
             embed = discord.Embed(
-            title=embed_title,
-            description=f":people_holding_hands: **{total_players_label}: {total_online}**\n\n" + "\n".join(output_lines),
-            color=embed_color
+                title=embed_title,
+                description=f":people_holding_hands: **{total_players_label}: {total_online}**\n\n" + "\n".join(output_lines),
+                color=embed_color
             )
+            embed.set_footer(text=f"Last updated: {now}")
 
             channel = discord_client.get_channel(status_channel_id)
             if channel:
