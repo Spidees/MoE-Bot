@@ -2,19 +2,24 @@
 import time
 import json
 from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 import os
 import glob
 import sqlite3
 import csv
 from datetime import datetime
 import requests
+
 # ========== DISCORD BOT (TOKEN-BASED, MULTI-CHANNEL) ==========
 import discord
 import asyncio
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 CHANNEL_MAP = {
-    "reward": int(os.getenv("DISCORD_CHANNEL_ID", "0")),
+    "reward": int(os.getenv("REWARD_DISCORD_CHANNEL_ID", "0")),
     "chat": int(os.getenv("CHAT_DISCORD_CHANNEL_ID", "0")),
     "status": int(os.getenv("STATUS_DISCORD_CHANNEL_ID", "0"))
 }
@@ -25,7 +30,7 @@ discord_message_queue = asyncio.Queue()
 
 @discord_client.event
 async def on_ready():
-    print(f"✅ Discord bot logged in as {discord_client.user}")
+    print(f"Discord bot logged in as {discord_client.user}")
     asyncio.create_task(discord_message_sender())
 
 async def discord_message_sender():
@@ -38,26 +43,32 @@ async def discord_message_sender():
             try:
                 await channel.send(message)
             except Exception as e:
-                print(f"❌ Error sending message to Discord: {e}")
+                print(f"Error sending message to Discord: {e}")
         await asyncio.sleep(1)
 
 def send_to_discord(nick, msg, target="reward"):
-    formatted = f"**{nick}**: {msg}"
+    # Checking permissions by target channel
+    if (target == "reward" and not ENABLE_REWARD_TO_DISCORD) or \
+       (target == "chat" and not ENABLE_CHAT_TO_DISCORD) or \
+       (target == "status" and not ENABLE_SERVER_STATUS):
+        debug_log(f"Discord messaging is disabled for target '{target}'. Skipping.")
+        return
+
+    formatted = msg
     asyncio.run_coroutine_threadsafe(
         discord_message_queue.put((formatted, target)),
         discord_client.loop
     )
 
-def start_discord_bot():
-    return discord_client.start(TOKEN)
+async def start_discord_bot():
+    await discord_client.start(TOKEN)
+
 # ========== END DISCORD BLOCK ==========
+
 import subprocess
 import mysql.connector
 from mysql.connector import Error
 import random
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Read DEBUG_MODE value (controls debug logs)
 DEBUG_MODE = os.getenv('DEBUG_MODE', 'False') == 'True'
@@ -72,6 +83,7 @@ log_directory = os.getenv('LOG_DIRECTORY')
 
 # Flags to enable/disable specific features
 ENABLE_REWARD_SYSTEM = os.getenv('ENABLE_REWARD_SYSTEM', 'True') == 'True'
+ENABLE_REWARD_TO_DISCORD = os.getenv("ENABLE_REWARD_TO_DISCORD", "True") == "True"
 ENABLE_CHAT_TO_DISCORD = os.getenv('ENABLE_CHAT_TO_DISCORD', 'True') == 'True'
 ENABLE_SERVER_STATUS = os.getenv('ENABLE_SERVER_STATUS', 'True') == 'True'
 
@@ -92,47 +104,51 @@ def find_latest_file(directory):
 
 # Function to monitor the latest log file for new entries
 def watch_log_file(directory):
-    current_file = find_latest_file(directory)
-    if not current_file:
-        debug_log(f"[INFO] Directory {directory} is empty or no log file exists.")
-        time.sleep(5)  # Wait 5 seconds and try again
-        return
-
-    debug_log(f"Starting to watch file: {current_file}")
-    file_position = os.path.getsize(current_file)
-
-    while True:
-        try:
-            new_file = find_latest_file(directory)
-            if new_file != current_file:
-                current_file = new_file
-                file_position = 0
-                debug_log(f"[INFO] New file detected: {current_file}")
-
-            with open(current_file, 'r', encoding='utf-8') as file:
-                file.seek(file_position)
-                lines = file.readlines()
-
-                if not lines:
-                    debug_log("[INFO] No new lines to process.")
-                else:
-                    debug_log(f"[INFO] Processing {len(lines)} lines.")
-
-                file_position = file.tell()
-
-            if lines:
-                for line in lines:
-                    if ENABLE_REWARD_SYSTEM:
-                        process_line(line)
-                    if ENABLE_CHAT_TO_DISCORD:
-                        process_chat_line(line)    
-
-        except Exception as e:
-            debug_log(f"Error reading file: {e}")
+    try:
+        current_file = find_latest_file(directory)
+        if not current_file:
+            debug_log(f"[INFO] Directory {directory} is empty or no log file exists.")
             time.sleep(5)
-            continue
+            return
 
-        time.sleep(1)
+        debug_log(f"Starting to watch file: {current_file}")
+        file_position = os.path.getsize(current_file)
+
+        while True:
+            try:
+                new_file = find_latest_file(directory)
+                if new_file != current_file:
+                    current_file = new_file
+                    file_position = 0
+                    debug_log(f"[INFO] New file detected: {current_file}")
+
+                with open(current_file, 'r', encoding='utf-8') as file:
+                    file.seek(file_position)
+                    lines = file.readlines()
+
+                    if not lines:
+                        debug_log("[INFO] No new lines to process.")
+                    else:
+                        debug_log(f"[INFO] Processing {len(lines)} lines.")
+
+                    file_position = file.tell()
+
+                if lines:
+                    for line in lines:
+                        if ENABLE_REWARD_SYSTEM:
+                            process_line(line)
+                        if ENABLE_CHAT_TO_DISCORD:
+                            process_chat_line(line)
+
+            except Exception as e:
+                debug_log(f"Error reading file: {e}")
+                time.sleep(5)
+                continue
+
+            time.sleep(1)
+
+    except KeyboardInterrupt:
+        debug_log("[INFO] Script interrupted by user (Ctrl+C). Exiting cleanly.")
 
 # REWARD SYSTEM
 
@@ -168,7 +184,7 @@ if ENABLE_REWARD_SYSTEM:
     csv_file_path = os.getenv('csv_file_path')
 
     # Enable/disable Discord messaging for rewards
-    enable_discord = os.getenv('ENABLE_DISCORD', 'True') == 'True'
+    enable_reward_to_discord = os.getenv('ENABLE_REWARD_TO_DISCORD', 'True') == 'True'
 
 
     # Initialize the CSV file if it doesn't already exist
@@ -242,7 +258,7 @@ if ENABLE_REWARD_SYSTEM:
 
         # Reward command and message template from ENV
         reward_command = os.getenv('REWARD_COMMAND', '!reward')
-        message_template = os.getenv('DISCORD_MESSAGE_TEMPLATE', "Received their daily reward by typing {command} in the chat.")
+        message_template = os.getenv('REWARD_DISCORD_MESSAGE_TEMPLATE', "Received their daily reward by typing {command} in the chat.")
 
         try:
             with open(csv_file_path, 'r', newline='') as csvfile:
@@ -354,30 +370,6 @@ if ENABLE_REWARD_SYSTEM:
         except json.JSONDecodeError as e:
             debug_log(f"Error decoding JSON: {e}")
 
-    def send_to_discord(from_nick, content):
-        if not enable_discord:
-            debug_log("Discord messaging is disabled. Skipping message.")
-            return
-
-        def escape_markdown(text):
-            markdown_chars = ['\\', '*', '_', '~', '`', '>', '|']
-            for char in markdown_chars:
-                text = text.replace(char, '\\' + char)
-            return text
-
-        def truncate_message(text, max_length=2000):
-            return text if len(text) <= max_length else text[:max_length-3] + '...'
-    
-        from_nick = escape_markdown(from_nick)
-        content = escape_markdown(content)
-        content = truncate_message(content)
-        message = f"{content}"
-        data = {"content": message}
-    
-            if response.status_code != 204:
-                debug_log(f"Error sending message to Discord: {response.status_code} - {response.text}")
-        else:
-
 else:
     debug_log("[INFO] Reward system is disabled.")        
 
@@ -399,8 +391,7 @@ if ENABLE_CHAT_TO_DISCORD:
     chat_message_template = os.getenv('CHAT_DISCORD_MESSAGE_TEMPLATE', "{server} - {chat_nick}: {chat_message}")
 
     # Function to send a chat message to Discord
-    def msg = chat_message_template.format(server=server, chat_nick=chat_nick, chat_message=chat_message)
-                send_to_discord(chat_nick, msg, target="chat"):
+    def send_chat_message_to_discord(server, chat_nick, chat_message):
         def escape_markdown(text):
             markdown_chars = ['\\', '*', '_', '~', '`', '>', '|']
             for char in markdown_chars:
@@ -413,11 +404,8 @@ if ENABLE_CHAT_TO_DISCORD:
         chat_nick = escape_markdown(chat_nick)
         chat_message = escape_markdown(chat_message)
         chat_message = truncate_message(chat_message)
-        message = chat_message_template.format(server=server, chat_nick=chat_nick, chat_message=chat_message)
-
-            if response.status_code != 204:
-                debug_log(f"Error sending chat message to Discord: {response.status_code} - {response.text}")
-        else:
+        msg = chat_message_template.format(server=server, chat_nick=chat_nick, chat_message=chat_message)
+        send_to_discord(server, msg, target="chat")
 
     # Function to process chat log lines
     def process_chat_line(line):
@@ -429,12 +417,11 @@ if ENABLE_CHAT_TO_DISCORD:
                 chat_nick = log_entry.get("from nick", "Unknown")
                 chat_content = log_entry.get("content", "")
 
-                # Check if reward system is enabled and chat contains the reward command
                 if ENABLE_REWARD_SYSTEM:
                     reward_command = os.getenv('REWARD_COMMAND', '/reward')
                     if reward_command in chat_content:
                         debug_log(f"Skipping message containing reward command: {chat_content}")
-                        return  # Skip processing this line for Chat to Discord
+                        return
 
                 if "^^&&" in chat_content:
                     guild_name, chat_message = chat_content.split("^^&&", 1)
@@ -442,8 +429,7 @@ if ENABLE_CHAT_TO_DISCORD:
                 else:
                     chat_message = chat_content
 
-                msg = chat_message_template.format(server=server_name, chat_nick=chat_nick, chat_message=chat_message)
-                send_to_discord(chat_nick, msg, target="chat")
+                send_chat_message_to_discord(server_name, chat_nick, chat_message)
         except json.JSONDecodeError as e:
             debug_log(f"Error decoding JSON in chat line: {e}")
 else:
@@ -459,8 +445,18 @@ else:
 
 # Main function starts the log monitoring
 import asyncio
-asyncio.get_event_loop().create_task(start_discord_bot())
 
 if __name__ == "__main__":
     debug_log("[INFO] Script is running...")
+
+    import threading
+
+    # We will run the Discord bot in a separate thread
+    def run_discord():
+        asyncio.run(start_discord_bot())
+
+    discord_thread = threading.Thread(target=run_discord, daemon=True)
+    discord_thread.start()
+
+    # Meanwhile, log monitoring runs synchronously
     watch_log_file(log_directory)
