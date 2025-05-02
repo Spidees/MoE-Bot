@@ -61,10 +61,10 @@ Create a `.env` file in the root directory of the bot. Here's an example configu
 # ╚════════════════════════════════════════════════════════════╝
 
 # Path to the chat log files
-LOG_DIRECTORY="C:/Users/Administrator/Desktop/WindowsGSM/servers/5/serverfiles/MatrixServerTool/chat_logs/"
+LOG_DIRECTORY="C:/serverfiles/MatrixServerTool/chat_logs/"
 
 # Enter your discord bot token here
-DISCORD_BOT_TOKEN=fdsafdasf123e45fdsdrefsdfas
+DISCORD_BOT_TOKEN=54d2eESs12w1we545s1q2w3e4a6w12ea1s23aw5e64as321ew3qw468fg9g4h6j
 
 # ╔════════════════════════════════════════════════════════════╗
 #                     REWARD SYSTEM INTEGRATION
@@ -74,10 +74,9 @@ DISCORD_BOT_TOKEN=fdsafdasf123e45fdsdrefsdfas
 ENABLE_REWARD_SYSTEM=True
 
 # MySQL Database parameters
-
 DB_HOST="127.0.0.1"
 DB_USER="moediscord"
-DB_PASSWORD="12d1e0S1edEWrD"
+DB_PASSWORD="moediscord"
 DB_DATABASE="moe_role"
 DB_COLLATION="utf8mb4_general_ci"
 
@@ -89,155 +88,28 @@ csv_file_path="account_log.csv"
 
 # Mapping of channels and their friendly names
 # Format: channel_id=friendly_name
-CHANNELS="132d7951a8b2000=301,132d7951a832000=3011,132d795eba32000=302,132d795eba32010=3022,132d79f50a32000=303,132d79f50ab2000=3033"
+CHANNELS="f37d4ffd832000=101,f5161ce4932000=102"
 
 # Define the IP address, port, and RCON password for each channel
-CHANNEL_301_IP="192.168.2.100"
-CHANNEL_301_PORT="5030"
-CHANNEL_301_RCON_PASSWORD="331343"
+CHANNEL_101_IP="192.168.2.100"
+CHANNEL_101_PORT="5030"
+CHANNEL_101_RCON_PASSWORD="password"
 
-CHANNEL_3011_IP="192.168.2.100"
-CHANNEL_3011_PORT="5030"
-CHANNEL_3011_RCON_PASSWORD="331343"
-
-CHANNEL_302_IP="192.168.2.100"
-CHANNEL_302_PORT="5031"
-CHANNEL_302_RCON_PASSWORD="331343"
-
-CHANNEL_3022_IP="192.168.2.100"
-CHANNEL_3022_PORT="5031"
-CHANNEL_3022_RCON_PASSWORD="331343"
-
-CHANNEL_303_IP="192.168.2.100"
-CHANNEL_303_PORT="5032"
-CHANNEL_303_RCON_PASSWORD="331343"
-
-CHANNEL_3033_IP="192.168.2.100"
-CHANNEL_3033_PORT="5032"
-CHANNEL_3033_RCON_PASSWORD="331343"
+CHANNEL_102_IP="192.168.2.100"
+CHANNEL_102_PORT="5032"
+CHANNEL_102_RCON_PASSWORD="password"
 
 # Define RCON commands with a chance of execution (0-100%)
 # {s_account_uid} will be replaced by the player’s ID
 
-# Boost měna
 COMMAND_1="AddCopper {s_account_uid} 10000"
 COMMAND_1_CHANCE=100
 
-# Treasure Key
 COMMAND_2="AddItemToPlayer {s_account_uid} 5412 1 1 1 -1 1.000000 false"
 COMMAND_2_CHANCE=100
 
-# Kaprové svícny
 COMMAND_3="AddItemToPlayer {s_account_uid} 4905 1 1 1 -1 1.000000 false"
-COMMAND_3_CHANCE=1
-
-# Kaprové svícny
-COMMAND_4="AddItemToPlayer {s_account_uid} 4794 1 1 1 -1 1.000000 false"
-COMMAND_4_CHANCE=1
-
-# Kaprí lucerna
-COMMAND_5="AddItemToPlayer {s_account_uid} 4906 1 1 1 -1 1.000000 false"
-COMMAND_5_CHANCE=1
-
-# Zlatá rybka lucerna
-COMMAND_6="AddItemToPlayer {s_account_uid} 4907 1 1 1 -1 1.000000 false"
-COMMAND_6_CHANCE=1
-
-# Kaprí lucerna
-COMMAND_7="AddItemToPlayer {s_account_uid} 4771 1 1 1 -1 1.000000 false"
-COMMAND_7_CHANCE=1
-
-# Zlatá rybka lucerna
-COMMAND_8="AddItemToPlayer {s_account_uid} 4772 1 1 1 -1 1.000000 false"
-COMMAND_8_CHANCE=1
-
-# Multifunkční nářadí
-COMMAND_9="AddItemToPlayer {s_account_uid} 4521 1 6 1 -1 1.000000 false"
-COMMAND_9_CHANCE=100
-
-# Novoroční dekorace
-COMMAND_10="AddItemToPlayer {s_account_uid} 3887 1 1 1 -1 1.000000 false"
-COMMAND_10_CHANCE=1
-
-# Lucerna briliantní budoucnosti
-COMMAND_11="AddItemToPlayer {s_account_uid} 3886 1 1 1 -1 1.000000 false"
-COMMAND_11_CHANCE=1
-
-# Lucerna štěstí a prosperity
-COMMAND_12="AddItemToPlayer {s_account_uid} 3885 1 1 1 -1 1.000000 false"
-COMMAND_12_CHANCE=1
-
-# Lucerna přání všeho nejlepšího
-COMMAND_13="AddItemToPlayer {s_account_uid} 3884 1 1 1 -1 1.000000 false"
-COMMAND_13_CHANCE=1
-
-# Postel-bang výbušná žabka
-COMMAND_14="AddItemToPlayer {s_account_uid} 3880 1 1 1 -1 1.000000 false"
-COMMAND_14_CHANCE=10
-
-# Výbušné žabky
-COMMAND_15="AddItemToPlayer {s_account_uid} 3881 1 1 1 -1 1.000000 false"
-COMMAND_15_CHANCE=10
-
-# Ohňostroj Zářivé květiny
-COMMAND_16="AddItemToPlayer {s_account_uid} 3853 1 1 1 -1 1.000000 false"
-COMMAND_16_CHANCE=15
-
-# Ohňostroj Sto květin
-COMMAND_17="AddItemToPlayer {s_account_uid} 3854 1 1 1 -1 1.000000 false"
-COMMAND_17_CHANCE=15
-
-# Ohňostroj Fialová a červená
-COMMAND_18="AddItemToPlayer {s_account_uid} 3855 1 1 1 -1 1.000000 false"
-COMMAND_18_CHANCE=15
-
-# Ohňostroj Bezesná noc
-COMMAND_19="AddItemToPlayer {s_account_uid} 3856 1 1 1 -1 1.000000 false"
-COMMAND_19_CHANCE=15
-
-# Výbušné žabky
-COMMAND_20="AddItemToPlayer {s_account_uid} 3850 1 1 1 -1 1.000000 false"
-COMMAND_20_CHANCE=10
-
-# Nekonečný uzel
-COMMAND_21="AddItemToPlayer {s_account_uid} 3845 1 1 1 -1 1.000000 false"
-COMMAND_21_CHANCE=1
-
-# Lucerna
-COMMAND_22="AddItemToPlayer {s_account_uid} 3844 1 1 1 -1 1.000000 false"
-COMMAND_22_CHANCE=1
-
-# Ohňostroj Jumping Jacks
-COMMAND_23="AddItemToPlayer {s_account_uid} 3843 1 1 1 -1 1.000000 false"
-COMMAND_23_CHANCE=10
-
-# Ohňostroj Bezesná noc
-COMMAND_24="AddItemToPlayer {s_account_uid} 3856 1 1 1 -1 1.000000 false"
-COMMAND_24_CHANCE=10
-
-# Kapr
-COMMAND_25="AddItemToPlayer {s_account_uid} 3850 1 1 1 -1 1.000000 false"
-COMMAND_25_CHANCE=5
-
-# Pilulka pro koně
-COMMAND_26="AddItemToPlayer {s_account_uid} 3878 1 1 1 -1 1.000000 false"
-COMMAND_26_CHANCE=3
-
-# Pilulka pro válečníka
-COMMAND_27="AddItemToPlayer {s_account_uid} 3739 1 1 1 -1 1.000000 false"
-COMMAND_27_CHANCE=3
-
-# EXP lékárna
-COMMAND_28="AddItemToPlayer {s_account_uid} 1838 1 1 1 -1 1.000000 false"
-COMMAND_28_CHANCE=100
-
-# Dárková krabička (boost potraviny)
-COMMAND_29="AddItemToPlayer {s_account_uid} 4536 1 1 1 -1 1.000000 false"
-COMMAND_29_CHANCE=100
-
-# Boost dovednosti
-COMMAND_30="AddItemToPlayer {s_account_uid} 4839 1 1 1 -1 1.000000 false"
-COMMAND_30_CHANCE=100
+COMMAND_3_CHANCE=100
 
 # Enable or disable Discord notifications
 ENABLE_REWARD_TO_DISCORD=True
@@ -257,7 +129,7 @@ REWARD_DISCORD_MESSAGE_TEMPLATE="**{nick}** received their daily reward by typin
 ENABLE_CHAT_TO_DISCORD=True
 
 # Mapping of channels and their friendly names
-CHAT_CHANNELS="132d7951a8b2000=County 301 | Tan-pa,132d795eba32000=County 302 | Ming-čen,132d79f50a32000=County 303 | Men-pej"
+CHAT_CHANNELS="132d7951a8b2000=County 101,132d795eba32000=County 102,132d79f50a32000=County 303"
 
 # Discord channel for sending ingame chat
 CHAT_DISCORD_CHANNEL_ID=1367623754548772924
