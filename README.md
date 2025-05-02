@@ -99,6 +99,10 @@ CHANNEL_102_IP="192.168.2.100"
 CHANNEL_102_PORT="5032"
 CHANNEL_102_RCON_PASSWORD="password"
 
+CHANNEL_103_IP="192.168.2.100"
+CHANNEL_103_PORT="5032"
+CHANNEL_103_RCON_PASSWORD="password"
+
 # Define RCON commands with a chance of execution (0-100%)
 # {s_account_uid} will be replaced by the player’s ID
 
@@ -129,7 +133,7 @@ REWARD_DISCORD_MESSAGE_TEMPLATE="**{nick}** received their daily reward by typin
 ENABLE_CHAT_TO_DISCORD=True
 
 # Mapping of channels and their friendly names
-CHAT_CHANNELS="132d7951a8b2000=County 101,132d795eba32000=County 102,132d79f50a32000=County 303"
+CHAT_CHANNELS="132d7951a8b2000=County 101,132d795eba32000=County 102,132d79f50a32000=County 103"
 
 # Discord channel for sending ingame chat
 CHAT_DISCORD_CHANNEL_ID=1367623754548772924
@@ -143,7 +147,8 @@ CHAT_DISCORD_MESSAGE_TEMPLATE="**{server} - {chat_nick}:** {chat_message}"
 # ╚════════════════════════════════════════════════════════════╝
 
 # Enable or disable server status messages being sent to Discord
-ENABLE_SERVER_STATUS=False
+ENABLE_SERVER_STATUS=True
+ENABLE_DISCORD_PRESENCE=True
 
 # Discord channel for sending server status
 STATUS_DISCORD_CHANNEL_ID=1088603624743125125
@@ -161,9 +166,9 @@ BATTLE_SERVER_4=51.51.51.51:5010
 # Optional: Status labels for different game modes or servers
 
 LOGIN_SERVER_NAME=Login
-CLUSTER_SERVER_1_NAME=Cluster 1
-CLUSTER_SERVER_2_NAME=Cluster 2
-CLUSTER_SERVER_3_NAME=Cluster 3
+CLUSTER_SERVER_1_NAME=County 101
+CLUSTER_SERVER_2_NAME=County 102
+CLUSTER_SERVER_3_NAME=County 103
 BATTLE_SERVER_1_NAME=Battle 1
 BATTLE_SERVER_2_NAME=Battle 2
 BATTLE_SERVER_3_NAME=Battle 3
@@ -198,7 +203,6 @@ PVE=PvE
 
 # Set to True to enable debugging
 DEBUG_MODE=True
-
 ```
 
 ### CSV File (account_log.csv)
